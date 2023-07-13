@@ -40,6 +40,11 @@ spec:
           env:
             - name: QUARKUS_PROFILE
               value: openshift-cluster
+            - name: INFINISPAN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: infinispan-generated-secret
           ports:
             - containerPort: {{ .Values.service.port }}
               protocol: TCP
