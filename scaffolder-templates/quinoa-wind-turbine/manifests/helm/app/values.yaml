@@ -81,5 +81,6 @@ tolerations: []
 affinity: {}
 
 infinispan:
-  nameOverride: "infinispan"
+  deploy:
+    nameOverride: "infinispan"
   
