@@ -88,7 +88,7 @@ spec:
         allowedHosts:
           - github.com
         description: ${{parameters.description}}
-        repoUrl: github.com?owner=${{parameters.githubOrg}}&repo=${{parameters.namespace}}-gatew
+        repoUrl: github.com?owner=${{parameters.githubOrg}}&repo=${{parameters.namespace}}-wind-turbine
         defaultBranch: main
         protectDefaultBranch: false
         repoVisibility: public    
