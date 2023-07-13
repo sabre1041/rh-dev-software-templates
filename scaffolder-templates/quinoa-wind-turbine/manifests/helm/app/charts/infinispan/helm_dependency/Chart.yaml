@@ -1,0 +1,10 @@
+apiVersion: v2
+name: parent
+version: 0.0.1
+
+dependencies:
+  - name: infinispan
+    alias: infinispan
+    version: 0.3.0
+    repository: https://charts.openshift.io/
+  
