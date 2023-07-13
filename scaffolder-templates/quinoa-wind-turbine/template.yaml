@@ -75,11 +75,11 @@ spec:
         targetPath: ./source
         values:
           githubOrg: ${{parameters.githubOrg}}
-          repoName: ${{parameters.namespace}}-gateway
+          repoName: ${{parameters.namespace}}-wind-turbine
           owner: ${{parameters.owner}}
           cluster_id: ${{parameters.cluster_id}}
           namespace: ${{parameters.namespace}}
-          component_id: ${{parameters.namespace}}-poi-gateway-app
+          component_id: ${{parameters.namespace}}-wind-turbine-app
     - id: publishSource
       name: Publishing to Source Code Repository
       action: publish:github
@@ -88,7 +88,7 @@ spec:
         allowedHosts:
           - github.com
         description: ${{parameters.description}}
-        repoUrl: github.com?owner=${{parameters.githubOrg}}&repo=${{parameters.namespace}}-gateway
+        repoUrl: github.com?owner=${{parameters.githubOrg}}&repo=${{parameters.namespace}}-gatew
         defaultBranch: main
         protectDefaultBranch: false
         repoVisibility: public    
@@ -105,25 +105,25 @@ spec:
         url: ./manifests
         copyWithoutTemplating: []
         values:
-          component_id: ${{parameters.namespace}}-poi-gateway-app
+          component_id: ${{parameters.namespace}}-wind-turbine-app
           description: ${{parameters.description}}
-          destination: https://github.com/${{parameters.githubOrg}}/${{parameters.namespace}}-gateway-gitops
-          source_repository: https://github.com/${{parameters.githubOrg}}/${{parameters.namespace}}-gateway
-          repository_name: ${{parameters.namespace}}-gateway
+          destination: https://github.com/${{parameters.githubOrg}}/${{parameters.namespace}}-wind-turbine-gitops
+          source_repository: https://github.com/${{parameters.githubOrg}}/${{parameters.namespace}}-wind-turbine
+          repository_name: ${{parameters.namespace}}-wind-turbine
           git_owner: ${{parameters.githubOrg}}
           cluster: ${{parameters.cluster_id}}
           namespace: ${{parameters.namespace}}
           image_host: ${{parameters.image_host}}
-          image_name: ${{parameters.namespace}}/poi-gateway-app
+          image_name: ${{parameters.namespace}}/wind-turbine-app
           image_tag: ${{parameters.image_tag}}
         targetPath: ./tenant-gitops
     - id: publishGitops
       name: Publishing to Deployment Resource Repository
       action: publish:github
       input:
-        repoUrl: github.com?owner=${{parameters.githubOrg}}&repo=${{parameters.namespace}}-gateway-gitops
-        title: gitops resources for ${{parameters.namespace}}-poi-gateway-app
-        description: gitops resources for ${{parameters.namespace}}-poi-gateway-app
+        repoUrl: github.com?owner=${{parameters.githubOrg}}&repo=${{parameters.namespace}}-wind-turbine-gitops
+        title: gitops resources for ${{parameters.namespace}}-wind-turbine-app
+        description: gitops resources for ${{parameters.namespace}}-wind-turbine-app
         sourcePath: ./tenant-gitops
         defaultBranch: main
         protectDefaultBranch: false
@@ -132,10 +132,10 @@ spec:
       name: Create ArgoCD Resources
       action: argocd:create-resources
       input:
-        appName: ${{parameters.namespace}}-poi-gateway-app-bootstrap
+        appName: ${{parameters.namespace}}-wind-turbine-app-bootstrap
         argoInstance: main
         namespace: janus-argocd
-        repoUrl: https://github.com/${{parameters.githubOrg}}/${{parameters.namespace}}-gateway-gitops.git
+        repoUrl: https://github.com/${{parameters.githubOrg}}/${{parameters.namespace}}-wind-turbine-gitops.git
         path: 'argocd/'
   output:
     links:
