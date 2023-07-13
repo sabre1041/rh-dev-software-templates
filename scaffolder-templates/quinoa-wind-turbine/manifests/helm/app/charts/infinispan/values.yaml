@@ -72,7 +72,7 @@ deploy:
 
   makeDataDirWritable: false
 
-  nameOverride: ""
+  nameOverride: "infinispan"
 
   resourceLabels: []
 
